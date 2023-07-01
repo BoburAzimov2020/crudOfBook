@@ -1,0 +1,10 @@
+server:
+  port: 8095
+
+spring:
+  application:
+    name: OneVizion
+  datasource:
+    url: jdbc:postgresql://localhost:5432/testDb
+    username: postgres
+    password:
