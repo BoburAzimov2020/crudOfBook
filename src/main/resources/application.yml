@@ -8,5 +8,3 @@ spring:
     url: jdbc:postgresql://localhost:5432/testDb
     username: postgres
     password:
-
-debug: true

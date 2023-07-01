@@ -24,7 +24,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public ApiResult<List<Book>> getAll() {
         List<Book> bookList = bookRepository.findAllSortedDescByTitle();
-        log.debug("Found {} count of sorted by title desc books.", bookList.size());
+        log.info("Found {} count of sorted by title desc books.", bookList.size());
         return bookList.isEmpty()
                 ? ApiResult.errorResponse("Table Book is Empty!")
                 : ApiResult.successResponse(bookList, "Founded count of book: " + bookList.size());
@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
     public ApiResult<String> add(Book book) {
         if (!bookRepository.add(book))
             throw new BookException("Book not created!");
-        log.debug("Book is success created by Title: {}, Author: {}, Desc: {}",
+        log.info("Book is success created by Title: {}, Author: {}, Desc: {}",
                 book.getTitle(), book.getAuthor(), book.getDescription());
         return ApiResult.successResponse("Book was created success!");
     }
@@ -43,7 +43,7 @@ public class BookServiceImpl implements BookService {
     public ApiResult<Map<String, List<Book>>> getAllByGroup() {
         List<Book> books = bookRepository.findAll();
         Map<String, List<Book>> booksGroupedByAuthor = books.stream().collect(Collectors.groupingBy(Book::getAuthor));
-        log.debug("Found {} authors of grouped.", booksGroupedByAuthor.size());
+        log.info("Found {} authors of grouped.", booksGroupedByAuthor.size());
         return booksGroupedByAuthor.isEmpty()
                 ? ApiResult.errorResponse("Books not found!")
                 : ApiResult.successResponse(booksGroupedByAuthor, "OK");
@@ -54,7 +54,7 @@ public class BookServiceImpl implements BookService {
     public ApiResult<List<AuthorStats>> getTopAuthors(char character) {
         String characterLowerCase = String.valueOf(character).toLowerCase();
         List<AuthorStats> authorStats = bookRepository.findTopAuthorsByCharacter(characterLowerCase);
-        log.debug("Found {} top 10 authorStats by character: '{}'.", authorStats.size(), characterLowerCase);
+        log.info("Found {} top 10 authorStats by character: '{}'.", authorStats.size(), characterLowerCase);
         return authorStats.isEmpty()
                 ? ApiResult.errorResponse("Authors not found!")
                 : ApiResult.successResponse(authorStats, "OK");

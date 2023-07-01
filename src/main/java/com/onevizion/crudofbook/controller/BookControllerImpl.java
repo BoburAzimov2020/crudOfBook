@@ -20,25 +20,25 @@ public class BookControllerImpl implements BookController {
 
     @Override
     public ApiResult<List<Book>> getAll() {
-        log.debug("GET Request to get all books sorted desc by title.");
+        log.info("GET Request to get all books sorted desc by title.");
         return bookService.getAll();
     }
 
     @Override
     public ApiResult<String> add(Book book) {
-        log.debug("POST Request to add new Book: {}", book);
+        log.info("POST Request to add new Book: {}", book);
         return bookService.add(book);
     }
 
     @Override
     public ApiResult<Map<String, List<Book>>> getAllByGroup() {
-        log.debug("GET Request to get all by group.");
+        log.info("GET Request to get all by group.");
         return bookService.getAllByGroup();
     }
 
     @Override
     public ApiResult<List<AuthorStats>> getTopAuthors(char character) {
-        log.debug("GET Request to get top authors by character: {}.", character);
+        log.info("GET Request to get top authors by character: {}.", character);
         return bookService.getTopAuthors(character);
     }
 }
