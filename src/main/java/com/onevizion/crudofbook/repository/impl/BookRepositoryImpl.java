@@ -20,8 +20,12 @@ public class BookRepositoryImpl implements BookRepository {
     private final static String GET_ALL_BOOKS = "SELECT * FROM book";
     private final static String GET_ALL_BOOKS_SORTED_BY_TITLE_DESC = "SELECT * FROM book ORDER BY LOWER(title) DESC";
     private final static String ADD_BOOK = "INSERT INTO book (title, author, description) VALUES (?, ?, ?)";
-    private final static String SELECT_TOP_AUTHORS_BY_CHARACTER = "SELECT author, COUNT(id) AS count FROM book" +
-            " WHERE LOWER(title) LIKE ? GROUP BY author ORDER BY count DESC LIMIT 10";
+    private final static String SELECT_TOP_AUTHORS_BY_CHARACTER = "SELECT author, " +
+            "sum(array_length(string_to_array(LOWER(title), LOWER(?)), 1) -1) as count from book" +
+            "            WHERE LOWER(title) LIKE ?" +
+            "            GROUP BY author" +
+            "            ORDER BY count desc" +
+            "            LIMIT 10";
 
     @Override
     public List<Book> findAllSortedDescByTitle() {
@@ -46,13 +50,8 @@ public class BookRepositoryImpl implements BookRepository {
         String likePattern = "%" + characterLowerCase + "%";
         return jdbcTemplate.query(
                 SELECT_TOP_AUTHORS_BY_CHARACTER,
-                new Object[]{likePattern},
-                (rs, rowNum) -> {
-                    String author = rs.getString("author");
-                    int count = rs.getInt("count");
-                    return new AuthorStats(author, count);
-                }
-        );
+                new Object[]{characterLowerCase, likePattern},
+                new AuthorMapper());
     }
 
     private static class BookMapper implements RowMapper<Book> {
@@ -64,6 +63,16 @@ public class BookRepositoryImpl implements BookRepository {
             book.setAuthor(rs.getString("author"));
             book.setDescription(rs.getString("description"));
             return book;
+        }
+    }
+
+    private static class AuthorMapper implements RowMapper<AuthorStats> {
+        @Override
+        public AuthorStats mapRow(ResultSet rs, int rowNum) throws SQLException {
+            AuthorStats authorStats = new AuthorStats();
+            authorStats.setAuthor(rs.getString("author"));
+            authorStats.setCount(rs.getInt("count"));
+            return authorStats;
         }
     }
 

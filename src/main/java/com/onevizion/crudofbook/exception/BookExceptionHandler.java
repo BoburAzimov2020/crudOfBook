@@ -39,7 +39,7 @@ public class BookExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResult<String>> handleGenericException(Exception ex) {
-        ApiResult<String> errorResponse = ApiResult.errorResponse("Internal server error");
+        ApiResult<String> errorResponse = ApiResult.errorResponse("Internal server error: " + ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
