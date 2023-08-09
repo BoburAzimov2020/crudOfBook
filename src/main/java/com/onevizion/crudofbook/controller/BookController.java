@@ -34,4 +34,5 @@ public interface BookController {
 
     @GetMapping(GET_FIRST_BOOK)
     ApiResult<Book> getFirst();
+    // Some comments.
 }
