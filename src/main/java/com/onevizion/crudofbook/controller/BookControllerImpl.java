@@ -42,6 +42,7 @@ public class BookControllerImpl implements BookController {
         return bookService.getTopAuthors(character);
     }
 
+    // TEST-003
     @Override
     public ApiResult<Book> getFirst() {
         // TODO Auto-generated method stub - Some additional text for test.
