@@ -41,4 +41,10 @@ public class BookControllerImpl implements BookController {
         log.info("GET Request to get top authors by character: {}.", character);
         return bookService.getTopAuthors(character);
     }
+
+    @Override
+    public ApiResult<Book> getFirst() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getFirst'");
+    }
 }
