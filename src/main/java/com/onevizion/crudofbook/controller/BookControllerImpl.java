@@ -50,6 +50,4 @@ public class BookControllerImpl implements BookController {
 
     // MAIN TEST COMMIT !!!
     // Some TEST COMMIT
-
-    // MAIN TEST COMMIT !!!
 }
