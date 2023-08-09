@@ -36,6 +36,7 @@ public class BookControllerImpl implements BookController {
         return bookService.getAllByGroup();
     }
 
+    // Main test commit.
     @Override
     public ApiResult<List<AuthorStats>> getTopAuthors(char character) {
         log.info("GET Request to get top authors by character: {}.", character);
