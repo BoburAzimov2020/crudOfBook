@@ -30,4 +30,6 @@ public interface BookController {
 
     @GetMapping(GET_TOP_AUTHORS_BY_CHARACTER)
     ApiResult<List<AuthorStats>> getTopAuthors(@RequestParam("character") char character);
+
+    // Some comments.
 }
