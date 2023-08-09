@@ -18,6 +18,7 @@ public interface BookController {
     String ADD_BOOK = "add";
     String GET_ALL_GROUPED_BY_AUTHOR = "grouped-by-author";
     String GET_TOP_AUTHORS_BY_CHARACTER = "top-authors-by-char";
+    String GET_FIRST_BOOK = "first-book";
 
     @GetMapping(GET_ALL_BOOK_SORTED_BY_TITLE)
     ApiResult<List<Book>> getAll();
@@ -31,5 +32,7 @@ public interface BookController {
     @GetMapping(GET_TOP_AUTHORS_BY_CHARACTER)
     ApiResult<List<AuthorStats>> getTopAuthors(@RequestParam("character") char character);
 
+    @GetMapping(GET_FIRST_BOOK)
+    ApiResult<Book> getFirst();
     // Some comments.
 }
