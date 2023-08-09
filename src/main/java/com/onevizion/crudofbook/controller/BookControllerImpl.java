@@ -44,7 +44,7 @@ public class BookControllerImpl implements BookController {
 
     @Override
     public ApiResult<Book> getFirst() {
-        // TODO Auto-generated method stub
+        // TODO Auto-generated method stub - Some additional text for test.
         throw new UnsupportedOperationException("Unimplemented method 'getFirst'");
     }
 }
